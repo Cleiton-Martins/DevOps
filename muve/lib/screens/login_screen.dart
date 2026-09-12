@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import '../routes.dart';
-import '../theme/app_theme.dart';
 import '../services/auth_service.dart'; // importa seu service
 
 class LoginScreen extends StatefulWidget {

@@ -42,7 +42,7 @@ class _MakeEventsScreenState extends State<MakeEventsScreen> {
         now.year,
         now.month,
         now.day,
-      ), // não deixa dia passado
+      ),
       lastDate: DateTime(now.year + 5),
       helpText: 'Selecione a data do evento',
     );
@@ -159,6 +159,9 @@ class _MakeEventsScreenState extends State<MakeEventsScreen> {
                         return;
                       }
 
+                      final messenger = ScaffoldMessenger.of(context);
+                      final navigator = Navigator.of(context);
+
                       final novoEvento = {
                         'titulo': _tituloController.text.trim(),
                         'descricao': _descricaoController.text.trim(),
@@ -177,10 +180,7 @@ class _MakeEventsScreenState extends State<MakeEventsScreen> {
 
                         if (resp.statusCode == 201) {
                           final eventoCriado = jsonDecode(resp.body);
-                          Navigator.pop(
-                            context,
-                            eventoCriado,
-                          ); // volta com o evento
+                          navigator.pop(eventoCriado);
                         } else {
                           String msg = 'Erro ao publicar evento';
                           try {
@@ -190,12 +190,12 @@ class _MakeEventsScreenState extends State<MakeEventsScreen> {
                               msg = decoded['message'] as String;
                             }
                           } catch (_) {}
-                          ScaffoldMessenger.of(
-                            context,
-                          ).showSnackBar(SnackBar(content: Text(msg)));
+                          messenger.showSnackBar(
+                            SnackBar(content: Text(msg)),
+                          );
                         }
                       } catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(
+                        messenger.showSnackBar(
                           SnackBar(content: Text('Erro de conexão: $e')),
                         );
                       }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:muve/theme/app_theme.dart' as theme;
 import '../../routes.dart';
 import 'package:muve/screens/events/cards/card_events.dart';
@@ -8,6 +7,7 @@ import 'package:muve/services/auth_service.dart';
 
 class EventsScreen extends StatelessWidget {
   const EventsScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +124,7 @@ class _EventsCarousel extends StatelessWidget {
                     height: 170,
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Colors.pinkAccent.withOpacity(0.2),
+                      color: Colors.pinkAccent.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Column(
@@ -134,7 +134,7 @@ class _EventsCarousel extends StatelessWidget {
                           width: 90,
                           height: 90,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.10),
+                            color: Colors.white.withValues(alpha: 0.10),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: ClipOval(
@@ -151,7 +151,7 @@ class _EventsCarousel extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            color: Colors.white.withOpacity(0.95),
+                            color: Colors.white.withValues(alpha: 0.95),
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -242,7 +242,7 @@ class _GenresGrid extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             if (genre['route'] != null) {
-              Navigator.pushNamed(context, genre['route']! as String);
+              Navigator.pushNamed(context, genre['route']!);
             }
           },
           child: ClipRRect(
@@ -250,11 +250,11 @@ class _GenresGrid extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.asset(genre['image']! as String, fit: BoxFit.cover),
-                Container(color: Colors.black.withOpacity(0.4)),
+                Image.asset(genre['image']!, fit: BoxFit.cover),
+                Container(color: Colors.black.withValues(alpha: 0.4)),
                 Center(
                   child: Text(
-                    genre['title']! as String,
+                    genre['title']!,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: Colors.white,
@@ -328,7 +328,7 @@ class _ContratanteActions extends StatelessWidget {
 /* =================== COMPONENTES REUTILIZÁVEIS =================== */
 
 class _MuveFab extends StatelessWidget {
-  const _MuveFab({super.key});
+  const _MuveFab();
 
   @override
   Widget build(BuildContext context) {
@@ -341,7 +341,7 @@ class _MuveFab extends StatelessWidget {
           Navigator.pushReplacementNamed(context, Routes.events);
         },
         elevation: 4,
-        backgroundColor: Colors.white.withOpacity(0.15),
+        backgroundColor: Colors.white.withValues(alpha: 0.15),
         shape: const CircleBorder(),
         child: ClipOval(
           child: Image.asset('assets/images/muvelogo.png', fit: BoxFit.cover),
@@ -358,7 +358,6 @@ class _BottomBar extends StatelessWidget {
   final String? onTapProfileRoute;
 
   const _BottomBar({
-    super.key,
     this.onTapEvents,
     this.onTapSearch,
     this.onTapMessages,
@@ -371,7 +370,7 @@ class _BottomBar extends StatelessWidget {
       top: false,
       child: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        color: const Color(0xFF2D124E).withOpacity(0.92),
+        color: const Color(0xFF2D124E).withValues(alpha: 0.92),
         notchMargin: 8,
         child: SizedBox(
           height: 80,
@@ -412,7 +411,6 @@ class _NavItem extends StatelessWidget {
     required this.icon,
     required this.label,
     this.onTap,
-    super.key,
   });
 
   @override
@@ -425,36 +423,16 @@ class _NavItem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: Colors.white.withOpacity(0.95), size: 22),
+            Icon(icon, color: Colors.white.withValues(alpha: 0.95), size: 22),
             const SizedBox(height: 3),
             Text(
               label,
               style: TextStyle(
-                color: Colors.white.withOpacity(0.95),
+                color: Colors.white.withValues(alpha: 0.95),
                 fontSize: 12,
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _Avatar extends StatelessWidget {
-  const _Avatar();
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, Routes.profile),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(22),
-        child: Image.asset(
-          'assets/images/muvelogo.png',
-          height: 44,
-          width: 44,
-          fit: BoxFit.cover,
         ),
       ),
     );

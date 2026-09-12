@@ -66,7 +66,7 @@ class _RegisterChoiceScreenState extends State<RegisterChoiceScreen> {
                   icon: Icons.mic,
                   title: 'Sou Usuário / Artista',
                   description:
-                  'Encontre eventos, bandas e personalize seu perfil para divulgar seu trabalho musical.',
+                      'Encontre eventos, bandas e personalize seu perfil para divulgar seu trabalho musical.',
                   route: Routes.registerUser,
                   pressed: _pressedUsuario,
                   onPressedChange: (value) {
@@ -82,7 +82,7 @@ class _RegisterChoiceScreenState extends State<RegisterChoiceScreen> {
                   icon: Icons.calendar_month,
                   title: 'Sou Contratante',
                   description:
-                  'Cadastre-se com CPF ou CNPJ para contratar músicos e bandas para seus eventos.',
+                      'Cadastre-se com CPF ou CNPJ para contratar músicos e bandas para seus eventos.',
                   route: Routes.registerClient,
                   pressed: _pressedContratante,
                   onPressedChange: (value) {
@@ -129,18 +129,18 @@ class _RegisterChoiceScreenState extends State<RegisterChoiceScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: Colors.white.withOpacity(0.3),
-                    ),
                     gradient: LinearGradient(
-                      colors: [
-                        Colors.purple.shade700.withOpacity(0.25),
-                        Colors.purple.shade500.withOpacity(0.25),
-                      ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
+                      colors: [
+                        Colors.purple.shade700.withValues(alpha: 0.25),
+                        Colors.purple.shade500.withValues(alpha: 0.25),
+                      ],
+                    ),
+                    color: Colors.white.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.3),
                     ),
                   ),
                   child: Row(

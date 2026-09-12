@@ -58,6 +58,7 @@ class CardContratante extends StatelessWidget {
                   Navigator.pop(ctx);
                   // dispara o snackbar no contexto raiz (da tela)
                   Future.microtask(() {
+                    if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Contrato fechado com sucesso!'),
@@ -78,9 +79,9 @@ class CardContratante extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.transparent,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Container(
         padding: const EdgeInsets.all(20),
@@ -93,7 +94,7 @@ class CardContratante extends StatelessWidget {
           borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withValues(alpha: 0.3),
               blurRadius: 12,
               offset: const Offset(0, -4),
             ),
@@ -161,7 +162,6 @@ class CardContratante extends StatelessWidget {
                 value: estilo,
               ),
               const SizedBox(height: 24),
-              // === 3 BOTÕES LADO A LADO ===
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -180,7 +180,7 @@ class CardContratante extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 13),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green, // verde
+                        backgroundColor: Colors.green,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -226,7 +226,7 @@ class CardContratante extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 13),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red, // vermelho
+                        backgroundColor: Colors.red,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),

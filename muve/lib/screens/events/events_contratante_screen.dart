@@ -58,6 +58,8 @@ class _EventsContratanteScreenState extends State<EventsContratanteScreen> {
   Future<void> carregarEventos() async {
     try {
       final resp = await http.get(Uri.parse('http://localhost:3000/eventos'));
+      if (!mounted) return;
+
       if (resp.statusCode == 200) {
         final List data = jsonDecode(resp.body);
         setState(() {
@@ -71,9 +73,10 @@ class _EventsContratanteScreenState extends State<EventsContratanteScreen> {
         );
       }
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Erro de rede: $e')));
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro de rede: $e')),
+      );
     }
   }
 
@@ -158,6 +161,7 @@ class _EventsContratanteScreenState extends State<EventsContratanteScreen> {
                               (ctx) => CardRegras(
                                 onConcordar: () async {
                                   Navigator.pop(ctx);
+                                  if (!mounted) return;
                                   final resultado = await Navigator.pushNamed(
                                     context,
                                     Routes.makeEvents,
@@ -170,7 +174,7 @@ class _EventsContratanteScreenState extends State<EventsContratanteScreen> {
                               ),
                         );
                       },
-                      backgroundColor: Colors.white.withOpacity(0.15),
+                      backgroundColor: Colors.white.withValues(alpha: 0.15),
                       shape: const CircleBorder(),
                       child: const Icon(
                         Icons.add,
@@ -224,7 +228,7 @@ class _EventsContratanteScreenState extends State<EventsContratanteScreen> {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.08),
+        color: Colors.white.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -259,7 +263,7 @@ class _EventsContratanteScreenState extends State<EventsContratanteScreen> {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.85),
+                    color: Colors.white.withValues(alpha: 0.85),
                     fontSize: 14,
                   ),
                 ),
@@ -277,7 +281,7 @@ class _EventsContratanteScreenState extends State<EventsContratanteScreen> {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.08),
+        color: Colors.white.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -299,11 +303,11 @@ class _EventsContratanteScreenState extends State<EventsContratanteScreen> {
                 ),
                 Text(
                   eventosPublicados[i]['hora']?.toString() ?? '',
-                  style: TextStyle(color: Colors.white.withOpacity(0.85)),
+                  style: TextStyle(color: Colors.white.withValues(alpha: 0.85)),
                 ),
                 Text(
                   eventosPublicados[i]['local']?.toString() ?? '',
-                  style: TextStyle(color: Colors.white.withOpacity(0.85)),
+                  style: TextStyle(color: Colors.white.withValues(alpha: 0.85)),
                 ),
               ],
             ),
@@ -316,6 +320,8 @@ class _EventsContratanteScreenState extends State<EventsContratanteScreen> {
                 final resp = await http.delete(
                   Uri.parse('http://localhost:3000/eventos/$id'),
                 );
+                if (!mounted) return;
+
                 if (resp.statusCode == 200) {
                   setState(() => eventosPublicados.removeAt(i));
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -337,7 +343,7 @@ class _EventsContratanteScreenState extends State<EventsContratanteScreen> {
 
 /* COMPONENTES REUTILIZÁVEIS */
 class _MuveFab extends StatelessWidget {
-  const _MuveFab({super.key});
+  const _MuveFab();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -346,7 +352,7 @@ class _MuveFab extends StatelessWidget {
       child: FloatingActionButton(
         onPressed: () => Navigator.pushReplacementNamed(context, Routes.events),
         elevation: 4,
-        backgroundColor: Colors.white.withOpacity(0.15),
+        backgroundColor: Colors.white.withValues(alpha: 0.15),
         shape: const CircleBorder(),
         child: ClipOval(
           child: Image.asset('assets/images/muvelogo.png', fit: BoxFit.cover),
@@ -362,7 +368,6 @@ class _BottomBar extends StatelessWidget {
   final VoidCallback? onTapMessages;
   final String? onTapProfileRoute;
   const _BottomBar({
-    super.key,
     this.onTapEvents,
     this.onTapSearch,
     this.onTapMessages,
@@ -374,7 +379,7 @@ class _BottomBar extends StatelessWidget {
       top: false,
       child: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        color: const Color(0xFF2D124E).withOpacity(0.92),
+        color: const Color(0xFF2D124E).withValues(alpha: 0.92),
         notchMargin: 8,
         child: SizedBox(
           height: 80,
@@ -393,8 +398,9 @@ class _BottomBar extends StatelessWidget {
                 icon: Icons.person_outline,
                 label: 'Perfil',
                 onTap: () {
-                  if (onTapProfileRoute != null)
+                  if (onTapProfileRoute != null) {
                     Navigator.pushNamed(context, onTapProfileRoute!);
+                  }
                 },
               ),
             ],
@@ -413,7 +419,6 @@ class _NavItem extends StatelessWidget {
     required this.icon,
     required this.label,
     this.onTap,
-    super.key,
   });
   @override
   Widget build(BuildContext context) {
@@ -425,12 +430,12 @@ class _NavItem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: Colors.white.withOpacity(0.95), size: 22),
+            Icon(icon, color: Colors.white.withValues(alpha: 0.95), size: 22),
             const SizedBox(height: 3),
             Text(
               label,
               style: TextStyle(
-                color: Colors.white.withOpacity(0.95),
+                color: Colors.white.withValues(alpha: 0.95),
                 fontSize: 12,
               ),
             ),

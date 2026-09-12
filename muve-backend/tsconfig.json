@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     /* Saída */
     // "rootDir": "./src",
     // "outDir": "./dist",

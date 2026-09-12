@@ -6,6 +6,7 @@ import '../services/auth_service.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     final gradient = theme.AppTheme.mainGradient;
@@ -160,10 +161,10 @@ class _NameAndArtistInfo extends StatelessWidget {
         Text(
           'Edite seu perfil de artista',
           style: TextStyle(
-            color: Colors.white.withOpacity(0.9),
+            color: Colors.white.withValues(alpha: 0.9),
             fontSize: 13,
             decoration: TextDecoration.underline,
-            decorationColor: Colors.white.withOpacity(0.9),
+            decorationColor: Colors.white.withValues(alpha: 0.9),
           ),
         ),
       ],
@@ -178,7 +179,7 @@ class _ActionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white.withOpacity(0.12),
+      color: Colors.white.withValues(alpha: 0.12),
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
@@ -197,7 +198,7 @@ class _ActionTile extends StatelessWidget {
                   ),
                 ),
               ),
-              Icon(Icons.chevron_right, color: Colors.white.withOpacity(0.9)),
+              Icon(Icons.chevron_right, color: Colors.white.withValues(alpha: 0.9)),
             ],
           ),
         ),
@@ -212,7 +213,7 @@ class _LogoutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.red.withOpacity(0.15),
+      color: Colors.red.withValues(alpha: 0.15),
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
@@ -287,7 +288,7 @@ class _PostCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(12, 14, 12, 8),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.10),
+        color: Colors.white.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(18),
       ),
       child: Column(
@@ -322,14 +323,14 @@ class _PostCard extends StatelessWidget {
                         const Spacer(),
                         Icon(
                           Icons.more_horiz,
-                          color: Colors.white.withOpacity(0.85),
+                          color: Colors.white.withValues(alpha: 0.85),
                         ),
                       ],
                     ),
                     const SizedBox(height: 2),
                     Text(
                       '$handle · $timeAgo',
-                      style: TextStyle(color: Colors.white.withOpacity(0.7)),
+                      style: TextStyle(color: Colors.white.withValues(alpha: 0.7)),
                     ),
                   ],
                 ),
@@ -350,19 +351,19 @@ class _PostCard extends StatelessWidget {
             children: [
               Icon(
                 Icons.thumb_up_alt_outlined,
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: 0.9),
                 size: 20,
               ),
               const SizedBox(width: 14),
               Icon(
                 Icons.mode_comment_outlined,
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: 0.9),
                 size: 20,
               ),
               const SizedBox(width: 14),
               Icon(
                 Icons.share_outlined,
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: 0.9),
                 size: 20,
               ),
             ],
@@ -374,7 +375,7 @@ class _PostCard extends StatelessWidget {
 }
 
 class _MuveFab extends StatelessWidget {
-  const _MuveFab({super.key});
+  const _MuveFab();
 
   @override
   Widget build(BuildContext context) {
@@ -384,7 +385,7 @@ class _MuveFab extends StatelessWidget {
       child: FloatingActionButton(
         onPressed: () {},
         elevation: 4,
-        backgroundColor: Colors.white.withOpacity(0.15),
+        backgroundColor: Colors.white.withValues(alpha: 0.15),
         shape: const CircleBorder(),
         child: ClipOval(
           child: Image.asset('assets/images/muvelogo.png', fit: BoxFit.cover),
@@ -401,7 +402,6 @@ class _BottomBar extends StatelessWidget {
   final String? onTapProfileRoute;
 
   const _BottomBar({
-    super.key,
     this.onTapEvents,
     this.onTapSearch,
     this.onTapMessages,
@@ -414,7 +414,7 @@ class _BottomBar extends StatelessWidget {
       top: false,
       child: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        color: const Color(0xFF2D124E).withOpacity(0.92),
+        color: const Color(0xFF2D124E).withValues(alpha: 0.92),
         notchMargin: 8,
         child: SizedBox(
           height: 80,
@@ -455,7 +455,6 @@ class _NavItem extends StatelessWidget {
     required this.icon,
     required this.label,
     this.onTap,
-    super.key,
   });
 
   @override
@@ -468,12 +467,12 @@ class _NavItem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: Colors.white.withOpacity(0.95), size: 22),
+            Icon(icon, color: Colors.white.withValues(alpha: 0.95), size: 22),
             const SizedBox(height: 3),
             Text(
               label,
               style: TextStyle(
-                color: Colors.white.withOpacity(0.95),
+                color: Colors.white.withValues(alpha: 0.95),
                 fontSize: 12,
               ),
             ),

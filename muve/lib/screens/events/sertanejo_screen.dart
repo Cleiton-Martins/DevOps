@@ -7,6 +7,7 @@ import '../../routes.dart';
 class SertanejoScreen extends StatelessWidget {
   const SertanejoScreen({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     final gradient = theme.AppTheme.mainGradient;
@@ -141,7 +142,7 @@ class _SertanejoBody extends StatelessWidget {
                   width: 120,
                   margin: const EdgeInsets.only(right: 8),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: Colors.white.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
@@ -218,7 +219,7 @@ class _SertanejoBody extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 12),
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.08),
+                color: Colors.white.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -253,7 +254,7 @@ class _SertanejoBody extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            color: Colors.white.withOpacity(0.85),
+                            color: Colors.white.withValues(alpha: 0.85),
                             fontSize: 14,
                           ),
                         ),
@@ -274,7 +275,7 @@ class _SertanejoBody extends StatelessWidget {
 
 // botão central com logo do Muve que volta para Home
 class _MuveFab extends StatelessWidget {
-  const _MuveFab({super.key});
+  const _MuveFab();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -283,7 +284,7 @@ class _MuveFab extends StatelessWidget {
       child: FloatingActionButton(
         onPressed: () => Navigator.pushReplacementNamed(context, Routes.events),
         elevation: 4,
-        backgroundColor: Colors.white.withOpacity(0.15),
+        backgroundColor: Colors.white.withValues(alpha: 0.15),
         shape: const CircleBorder(),
         child: ClipOval(
           child: Image.asset('assets/images/muvelogo.png', fit: BoxFit.cover),
@@ -301,7 +302,6 @@ class _BottomBar extends StatelessWidget {
   final String? onTapProfileRoute;
 
   const _BottomBar({
-    super.key,
     this.onTapEvents,
     this.onTapSearch,
     this.onTapMessages,
@@ -314,7 +314,7 @@ class _BottomBar extends StatelessWidget {
       top: false,
       child: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        color: const Color(0xFF2D124E).withOpacity(0.92),
+        color: const Color(0xFF2D124E).withValues(alpha: 0.92),
         notchMargin: 8,
         child: SizedBox(
           height: 80,
@@ -355,7 +355,6 @@ class _NavItem extends StatelessWidget {
     required this.icon,
     required this.label,
     this.onTap,
-    super.key,
   });
 
   @override
@@ -368,12 +367,12 @@ class _NavItem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: Colors.white.withOpacity(0.95), size: 22),
+            Icon(icon, color: Colors.white.withValues(alpha: 0.95), size: 22),
             const SizedBox(height: 3),
             Text(
               label,
               style: TextStyle(
-                color: Colors.white.withOpacity(0.95),
+                color: Colors.white.withValues(alpha: 0.95),
                 fontSize: 12,
               ),
             ),
