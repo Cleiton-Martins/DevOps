@@ -48,22 +48,26 @@ jobs:
         working-directory: muve-backend
         run: npm ci
 
-      - name: Install frontend dependencies
-        working-directory: muve
-        run: flutter pub get
-
-      - name: Run unit tests
+      - name: Generate Prisma Client
         working-directory: muve-backend
-        run: npm run test:unit
+        run: npx prisma generate
 
       - name: Apply test database migrations
         working-directory: muve-backend
         run: npx prisma migrate deploy
 
-      - name: Run integration tests
+      - name: Run unit tests with coverage
         working-directory: muve-backend
-        run: npm run test:integration
+        run: npm run test:unit -- --coverage
 
-      - name: Run system tests
+      - name: Run integration tests with coverage
+        working-directory: muve-backend
+        run: npm run test:integration -- --coverage
+
+      - name: Install frontend dependencies
         working-directory: muve
-        run: flutter test test/system
+        run: flutter pub get
+
+      - name: Run system tests with coverage
+        working-directory: muve
+        run: flutter test --coverage test/system
